@@ -20,4 +20,24 @@ class Signature extends Model
     protected $casts = [
         'status' => SignatureStatus::class
     ];
+
+    public function client(){
+        // 1 assinatura pertence a 1 cliente
+        return $this->belongsTo(Client::class);
+    }
+
+    public function plan(){
+        // 1 assinatura possui 1 plano
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function transactions(){
+        // 1 assinatura pode estar em muitas transações
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function signatureHistories(){
+        // 1 assinatura pode ter varios historicos
+        return $this->hasMany(SignatureHistory::class);
+    }
 }
